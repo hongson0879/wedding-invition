@@ -30,7 +30,7 @@ jobs:
       - name: Upload frontend directory
         uses: actions/upload-pages-artifact@v3
         with:
-          path: 'front-end' # Chỉ định đúng tên folder chứa index.html
+          path: 'frontend' # Chỉ định đúng tên folder chứa index.html
 
       - name: Deploy to GitHub Pages
         id: deployment
