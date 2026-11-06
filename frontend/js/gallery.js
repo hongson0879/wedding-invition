@@ -1,5 +1,6 @@
 /**
- * gallery.js - Xử lý album ảnh cưới và Lightbox phóng to ảnh
+ * gallery.js - Xử lý album ảnh bất đối xứng và Lightbox (05. Gallery)
+ * Hỗ trợ click mở Lightbox, phím mũi tên và vuốt (swipe) trái/phải trên điện thoại
  */
 function initGallery() {
     const galleryContainer = document.getElementById('galleryGrid');
@@ -12,24 +13,10 @@ function initGallery() {
 
     if (!galleryContainer) return;
 
-    const items = WEDDING_CONFIG.gallery || [];
+    const images = Array.from(galleryContainer.querySelectorAll('.gallery-item img'));
     let currentIndex = 0;
-
-    // Render danh sách ảnh từ cấu hình nếu có
-    if (items.length > 0) {
-        galleryContainer.innerHTML = '';
-        items.forEach((item, index) => {
-            const img = document.createElement('img');
-            img.src = item.thumb || item.src;
-            img.alt = item.alt || `Ảnh cưới ${index + 1}`;
-            img.dataset.full = item.src;
-            img.dataset.index = index;
-            img.loading = 'lazy';
-            galleryContainer.appendChild(img);
-        });
-    }
-
-    const images = Array.from(galleryContainer.querySelectorAll('img'));
+    let touchStartX = 0;
+    let touchEndX = 0;
 
     function openLightbox(index) {
         if (!lightbox || images.length === 0) return;
@@ -38,15 +25,17 @@ function initGallery() {
         lightboxImg.src = targetImg.dataset.full || targetImg.src;
         lightboxImg.alt = targetImg.alt;
         if (lightboxCaption) {
-            lightboxCaption.textContent = `${targetImg.alt} (${currentIndex + 1}/${images.length})`;
+            lightboxCaption.textContent = `${targetImg.alt} (${currentIndex + 1} / ${images.length})`;
         }
         lightbox.classList.add('active');
+        lightbox.setAttribute('aria-hidden', 'false');
         document.body.style.overflow = 'hidden';
     }
 
     function closeLightbox() {
         if (!lightbox) return;
         lightbox.classList.remove('active');
+        lightbox.setAttribute('aria-hidden', 'true');
         document.body.style.overflow = '';
     }
 
@@ -60,8 +49,9 @@ function initGallery() {
         openLightbox(currentIndex + 1);
     }
 
-    images.forEach((img, idx) => {
-        img.addEventListener('click', () => openLightbox(idx));
+    // Nhấn vào từng khung ảnh để mở Lightbox
+    galleryContainer.querySelectorAll('.gallery-item').forEach((item, idx) => {
+        item.addEventListener('click', () => openLightbox(idx));
     });
 
     if (closeBtn) closeBtn.addEventListener('click', closeLightbox);
@@ -72,6 +62,23 @@ function initGallery() {
         lightbox.addEventListener('click', e => {
             if (e.target === lightbox) closeLightbox();
         });
+
+        // Hỗ trợ vuốt ngang (swipe) trên màn hình cảm ứng điện thoại
+        lightbox.addEventListener('touchstart', e => {
+            touchStartX = e.changedTouches[0].screenX;
+        }, { passive: true });
+
+        lightbox.addEventListener('touchend', e => {
+            touchEndX = e.changedTouches[0].screenX;
+            const deltaX = touchEndX - touchStartX;
+            if (Math.abs(deltaX) > 45) {
+                if (deltaX < 0) {
+                    showNext();
+                } else {
+                    showPrev();
+                }
+            }
+        }, { passive: true });
     }
 
     document.addEventListener('keydown', e => {

@@ -1,83 +1,107 @@
 /**
- * envelope.js - Xử lý hiệu ứng mở thiệp, cuộn trang (scroll reveal) và cánh hoa rơi
+ * envelope.js - Xử lý hiệu ứng mở phong bì (01. Envelope), cuộn trang mượt, reveal và parallax
+ * - Nhấn nút mở thiệp -> Nắp phong bì mở ra (.flap-open) -> Thiệp bên trong trượt lên (.letter-slide)
+ * - Màn hình phong bì mờ dần (.envelope-dismissed) và nhạc nền bắt đầu phát
  */
-function observeReveal() {
+function initScrollRevealAndParallax() {
     const io = new IntersectionObserver(entries => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.classList.add('show');
+                entry.target.classList.add('in');
                 io.unobserve(entry.target);
             }
         });
-    }, { threshold: 0.15 });
+    }, { threshold: 0.14 });
 
-    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+    document.querySelectorAll('.reveal, .stagger, .wipe-holder').forEach(el => io.observe(el));
+
+    // Hiệu ứng thanh điều hướng & Parallax nhẹ cho ảnh
+    const plxImages = Array.from(document.querySelectorAll('.plx'));
+    const heroImg = document.getElementById('heroImg');
+    const navbar = document.querySelector('.navbar');
+    let ticking = false;
+
+    window.addEventListener('scroll', () => {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(() => {
+            ticking = false;
+            const sy = window.scrollY;
+            const vh = window.innerHeight;
+
+            if (navbar) {
+                navbar.classList.toggle('scrolled', sy > vh * 0.35);
+            }
+
+            for (const img of plxImages) {
+                const rect = img.parentElement.getBoundingClientRect();
+                const progress = (rect.top + rect.height / 2 - vh / 2) / vh;
+                const speed = parseFloat(img.dataset.speed) || -16;
+                img.style.transform = `translateY(${progress * speed}px) scale(1.08)`;
+            }
+
+            if (heroImg) {
+                const sp = Math.min(1, Math.max(0, sy / vh));
+                heroImg.style.transform = `translateY(${sp * 36}px) scale(${1.1 - sp * 0.05})`;
+            }
+        });
+    }, { passive: true });
 }
 
 function initEnvelope() {
-    const openBtn = document.getElementById('openBtn');
-    const envelope = document.getElementById('envelope');
-    const card = document.getElementById('card');
+    const envelopeSection = document.getElementById('envelopeSection');
+    const envelopeBox = document.getElementById('envelopeBox');
+    const openBtn = document.getElementById('openEnvelopeBtn');
 
-    if (openBtn && envelope && card) {
-        openBtn.addEventListener('click', () => {
-            envelope.classList.add('open');
-            card.classList.remove('hidden');
-            observeReveal();
-            if (window.MusicController && WEDDING_CONFIG.music.autoPlayOnOpen) {
-                MusicController.toggle(true);
+    // Khóa cuộn trang khi chưa mở thiệp
+    document.body.classList.add('envelope-locked');
+
+    function handleOpenEnvelope() {
+        if (!envelopeBox || envelopeBox.classList.contains('opening')) return;
+        envelopeBox.classList.add('opening');
+
+        // Bắt đầu phát nhạc nền ngay sau thao tác mở thiệp
+        if (window.MusicController && (!window.WEDDING_CONFIG || WEDDING_CONFIG.music.autoPlayOnOpen)) {
+            MusicController.toggle(true);
+        }
+
+        // Bước 1: Mở nắp phong bì (0ms -> 650ms)
+        // Bước 2: Thiệp bên trong trượt lên (650ms -> 1500ms)
+        // Bước 3: Ẩn màn phong bì và hiển thị Hero section
+        setTimeout(() => {
+            if (envelopeSection) {
+                envelopeSection.classList.add('envelope-dismissed');
+            }
+            document.body.classList.remove('envelope-locked');
+            document.body.classList.add('loaded');
+        }, 1550);
+    }
+
+    if (openBtn) {
+        openBtn.addEventListener('click', e => {
+            e.stopPropagation();
+            handleOpenEnvelope();
+        });
+    }
+
+    if (envelopeBox) {
+        envelopeBox.addEventListener('click', handleOpenEnvelope);
+    }
+
+    // Điều hướng mượt cho các liên kết neo (#section)
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', e => {
+            const targetId = anchor.getAttribute('href');
+            if (!targetId || targetId === '#') return;
+            const targetEl = document.querySelector(targetId);
+            if (targetEl) {
+                e.preventDefault();
+                targetEl.scrollIntoView({ behavior: 'smooth' });
             }
         });
-    }
+    });
+
+    initScrollRevealAndParallax();
 }
 
-function initPetals() {
-    const cv = document.getElementById('petals');
-    if (!cv) return;
-    const ctx = cv.getContext('2d');
-
-    function resize() {
-        cv.width = window.innerWidth;
-        cv.height = window.innerHeight;
-    }
-    resize();
-    window.addEventListener('resize', resize);
-
-    function newPetal(init) {
-        return {
-            x: Math.random() * window.innerWidth,
-            y: init ? Math.random() * window.innerHeight : -20,
-            r: 4 + Math.random() * 6,
-            vy: 0.6 + Math.random() * 1.2,
-            vx: -0.5 + Math.random(),
-            a: Math.random() * 6.28,
-            va: 0.02 + Math.random() * 0.03
-        };
-    }
-
-    const petals = Array.from({ length: 30 }, () => newPetal(true));
-
-    (function loop() {
-        ctx.clearRect(0, 0, cv.width, cv.height);
-        petals.forEach((p, i) => {
-            p.y += p.vy;
-            p.x += p.vx + Math.sin(p.a) * 0.6;
-            p.a += p.va;
-            if (p.y > cv.height + 20) petals[i] = newPetal(false);
-            ctx.save();
-            ctx.translate(p.x, p.y);
-            ctx.rotate(p.a);
-            ctx.fillStyle = 'rgba(232,130,155,.7)';
-            ctx.beginPath();
-            ctx.ellipse(0, 0, p.r, p.r / 2, 0, 0, 6.28);
-            ctx.fill();
-            ctx.restore();
-        });
-        requestAnimationFrame(loop);
-    })();
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-    initEnvelope();
-    initPetals();
-});
+document.addEventListener('DOMContentLoaded', initEnvelope);

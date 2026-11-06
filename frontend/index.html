@@ -2,148 +2,472 @@
 <html lang="vi">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Thiệp mời cưới - Hồng Sơn &amp; Tố Hạ</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Great+Vibes&family=Montserrat:wght@300;400;500&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/animation.css">
-    <link rel="stylesheet" href="css/responsive.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thiệp Mời Cưới | Tố Hạ &amp; Hồng Sơn - 28.03.2027</title>
+  <meta name="robots" content="noindex">
+  <!-- Hỗ trợ đầy đủ dấu tiếng Việt cho Cormorant, Montserrat, WindSong -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Montserrat:wght@300;400&family=WindSong:wght@400;500&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="css/fonts.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/animation.css">
+  <link rel="stylesheet" href="css/responsive.css">
 </head>
 
 <body>
 
-    <div class="envelope-screen" id="envelope">
-        <div class="envelope-card">
-            <p class="small">Bạn nhận được một lời mời</p>
-            <h2 class="script">Sơn &amp; Hạ</h2>
-            <button id="openBtn">Mở thiệp ✉</button>
-        </div>
+  <!-- ======================================================================
+         01. ENVELOPE – MỞ THIỆP
+         - Phong bì màu ivory, monogram tên hai người.
+         - Nút mở thiệp.
+         - Hiệu ứng nắp phong bì mở, thiệp trượt ra.
+         - Nhạc nền bắt đầu sau thao tác mở.
+         ====================================================================== -->
+  <section class="envelope-section" id="envelopeSection" aria-label="01. Mở thiệp cưới">
+    <div class="envelope-intro">
+      <span class="caps">Thiệp mời lễ thành hôn</span>
+      <p class="lbl">Trân trọng kính mời quý khách</p>
     </div>
 
-    <button class="music-btn" id="musicBtn" title="Bật/tắt nhạc">♪</button>
+    <div class="envelope-stage">
+      <div class="envelope-box" id="envelopeBox">
+        <!-- Nắp phong bì -->
+        <div class="envelope-flap"></div>
 
-    <main id="card" class="hidden">
-        <section class="hero">
-            <p class="small">Trân trọng kính mời</p>
-            <h1 class="script">Hồng Sơn <span>&amp;</span> Tố Hạ</h1>
-            <p class="date-line">Tham dự lễ thành hôn của chúng tôi</p>
-            <p class="big-date">28 . 03 . 2027</p>
-            <p class="big-date">21 . 02 . Đinh Mùi</p>
-            <div class="scroll-hint">↓</div>
-        </section>
-
-        <section class="reveal couple">
-            <h2 class="title">Cô dâu &amp; Chú rể</h2>
-            <div class="people">
-                <div class="person">
-                    <div class="avatar">S</div>
-                    <h3>Đặng Hồng Sơn</h3>
-                    <p>Con trai bà Nguyễn Thị Mai</p>
-                </div>
-                <div class="heart">❤</div>
-                <div class="person">
-                    <div class="avatar">H</div>
-                    <h3>Phạm Nguyên Tố Hạ</h3>
-                    <p>Con gái ông Phạm Công Toàn<br>và bà Nguyễn Thị Tâm Anh</p>
-                </div>
-            </div>
-        </section>
-
-        <section class="reveal countdown-sec">
-            <h2 class="title">Đếm ngược đến ngày cưới</h2>
-            <div class="countdown" id="countdown">
-                <div><b id="d">0</b><span>Ngày</span></div>
-                <div><b id="h">00</b><span>Giờ</span></div>
-                <div><b id="m">00</b><span>Phút</span></div>
-                <div><b id="s">00</b><span>Giây</span></div>
-            </div>
-        </section>
-
-        <section class="reveal event">
-            <h2 class="title">Thông tin buổi tiệc</h2>
-            <div class="event-box">
-                <p>🕒 <b>11:00</b> - Chủ Nhật, 28/03/2027</p>
-                <p>📍 <b>Trung Tâm Hội Nghị Tiệc Cưới Gold Palace</b><br>QL1A, An Thắng, Đà Nẵng, Việt Nam</p>
-                <a class="btn" target="_blank" href="https://maps.app.goo.gl/SURdS3xMy4xF3qZJ9">Xem bản đồ</a>
-            </div>
-        </section>
-
-        <section class="reveal gallery-sec">
-            <h2 class="title">Album ảnh cưới</h2>
-            <div class="gallery" id="galleryGrid">
-                <img src="https://picsum.photos/seed/wed1/400/500" alt="Khoảnh khắc ngọt ngào 1">
-                <img src="https://picsum.photos/seed/wed2/400/400" alt="Khoảnh khắc ngọt ngào 2">
-                <img src="https://picsum.photos/seed/wed3/400/500" alt="Khoảnh khắc ngọt ngào 3">
-                <img src="https://picsum.photos/seed/wed4/400/400" alt="Khoảnh khắc ngọt ngào 4">
-            </div>
-        </section>
-
-        <section class="reveal rsvp">
-            <h2 class="title">Xác nhận tham dự</h2>
-            <form id="rsvpForm">
-                <input type="text" id="name" placeholder="Họ và tên" required>
-                <select id="guests">
-                    <option value="1">1 người</option>
-                    <option value="2">2 người</option>
-                    <option value="3">3 người</option>
-                    <option value="4">4 người</option>
-                </select>
-                <select id="attend">
-                    <option value="yes">Tôi sẽ tham dự</option>
-                    <option value="no">Rất tiếc, tôi không thể đến</option>
-                </select>
-                <textarea id="wish" rows="3" placeholder="Lời chúc gửi đến cô dâu chú rể..."></textarea>
-                <button type="submit" class="btn">Gửi xác nhận</button>
-            </form>
-            <div class="wishes" id="wishes"></div>
-        </section>
-
-        <section class="reveal qr-sec">
-            <h2 class="title">Mã QR</h2>
-            <div class="qr-grid">
-                <div class="qr-item">
-                    <img id="qrMap" src="assets/qr/qr-map.svg" alt="QR Google Map" width="200" height="200">
-                    <h3>Chỉ đường Google Maps</h3>
-                    <p>Quét để xem vị trí buổi tiệc</p>
-                </div>
-                <div class="qr-item">
-                    <img id="qrGift" src="assets/qr/qr-gift.svg" alt="QR chuyển khoản mừng cưới" width="200" height="200">
-                    <h3>Mừng cưới</h3>
-                    <p id="bankInfo">VCB - 0123456789<br>DANG HONG SON</p>
-                </div>
-            </div>
-        </section>
-
-        <footer>
-            <p class="script">Cảm ơn bạn rất nhiều!</p>
-            <p class="small">Sự hiện diện của bạn là niềm vinh hạnh của gia đình chúng tôi</p>
-        </footer>
-    </main>
-
-    <!-- Lightbox phóng to ảnh album -->
-    <div class="lightbox" id="lightbox" role="dialog" aria-hidden="true">
-        <button class="lightbox-close" id="lightboxClose" aria-label="Đóng">&times;</button>
-        <button class="lightbox-nav lightbox-prev" id="lightboxPrev" aria-label="Ảnh trước">&#10094;</button>
-        <div class="lightbox-content">
-            <img id="lightboxImg" src="" alt="Xem ảnh phóng to">
-            <p class="lightbox-caption" id="lightboxCaption"></p>
+        <!-- Tấm thiệp bên trong trượt ra -->
+        <div class="envelope-letter">
+          <span class="caps">Save the Date</span>
+          <h3>Tố Hạ &amp; Hồng Sơn</h3>
+          <p class="letter-date">Chủ Nhật · 28 . 03 . 2027</p>
         </div>
-        <button class="lightbox-nav lightbox-next" id="lightboxNext" aria-label="Ảnh tiếp">&#10095;</button>
+
+        <!-- Mặt túi phong bì màu Ivory -->
+        <div class="envelope-pocket"></div>
+
+        <!-- Con dấu Monogram tên hai người -->
+        <div class="envelope-seal" title="Monogram Tố Hạ & Hồng Sơn">
+          <span>H&amp;S</span>
+        </div>
+      </div>
     </div>
 
-    <canvas id="petals"></canvas>
+    <!-- <div class="envelope-actions">
+      <button type="button" class="rbtn" id="openEnvelopeBtn">
+        <span>Mở thiệp mời</span>
+        <span>&#9993;</span>
+      </button>
+    </div> -->
+  </section>
 
-    <!-- Các module JS đã tách theo chức năng -->
-    <script src="js/config.js"></script>
-    <script src="js/music.js"></script>
-    <script src="js/envelope.js"></script>
-    <script src="js/countdown.js"></script>
-    <script src="js/gallery.js"></script>
-    <script src="js/rsvp.js"></script>
+  <!-- Nút điều khiển nhạc nền -->
+  <button type="button" class="music-btn" id="musicBtn" title="Bật / Tắt nhạc nền" aria-label="Bật / Tắt nhạc nền">
+    &#9834;
+  </button>
+
+  <!-- Thanh điều hướng cố định -->
+  <nav class="navbar" aria-label="Điều hướng chính">
+    <a class="mono" href="#hero">H<span class="amp">&amp;</span>S</a>
+    <div class="nav-links">
+      <a href="#hero">Giới thiệu</a>
+      <a href="#countdown">Đếm ngược</a>
+      <a href="#story">Câu chuyện</a>
+      <a href="#gallery">Album ảnh</a>
+      <a href="#wedding-info">Lễ cưới</a>
+      <a href="#rsvp">Xác nhận</a>
+      <a href="#wedding-gift">Mừng cưới</a>
+    </div>
+  </nav>
+
+  <main>
+    <!-- ==================================================================
+             02. HERO – GIỚI THIỆU CÔ DÂU CHÚ RỂ
+             - Ảnh cưới lớn.
+             - Tên cô dâu và chú rể.
+             - Ngày tổ chức.
+             - Một câu trích dẫn ngắn.
+             ================================================================== -->
+    <section class="hero" id="hero">
+      <div>
+        <span class="caps hero-tag">Lễ Thành Hôn</span>
+        <h1 class="serif hero-names">
+          <span class="hl"><span>Tố Hạ</span></span>
+          <span class="hero-amp">&amp;</span>
+          <span class="hl"><span>Hồng Sơn</span></span>
+        </h1>
+
+        <div class="hero-meta">
+          <span class="hero-date">28 . 03 . 2027</span>
+          <span class="hero-lunar">Chủ Nhật · Ngày 21 tháng 02 năm Đinh Mùi · Gold Palace Đà Nẵng</span>
+          <blockquote class="hero-quote">
+            “Giữa hàng vạn người bước qua nhau, thật may mắn vì chúng ta đã dừng lại, nắm tay và chọn đi cùng nhau đến
+            suốt cuộc đời.”
+          </blockquote>
+        </div>
+      </div>
+
+      <figure class="hero-fig">
+        <div class="hero-arch">
+          <img src="img/hero.jpg" alt="Ảnh cưới Tố Hạ và Hồng Sơn" id="heroImg">
+        </div>
+        <figcaption class="cap">Phạm Nguyên Tố Hạ &amp; Đặng Hồng Sơn</figcaption>
+      </figure>
+    </section>
+
+    <!-- ==================================================================
+             03. COUNTDOWN – ĐẾM NGƯỢC
+             - Ngày, giờ, phút, giây.
+             - Tự động cập nhật theo ngày cưới.
+             ================================================================== -->
+    <section class="countdown-sec" id="countdown">
+      <div class="sec-head reveal">
+        <!-- <span class="sec-num">COUNTDOWN</span> -->
+        <span class="lbl">Cùng đếm ngược đến khoảnh khắc thiêng liêng</span>
+        <h2>Đếm ngược ngày chung đôi</h2>
+      </div>
+
+      <div class="countdown-grid stagger">
+        <div class="cd-box">
+          <span class="cd-num" id="cdDays">00</span>
+          <span class="cd-label">Ngày</span>
+        </div>
+        <div class="cd-box">
+          <span class="cd-num" id="cdHours">00</span>
+          <span class="cd-label">Giờ</span>
+        </div>
+        <div class="cd-box">
+          <span class="cd-num" id="cdMinutes">00</span>
+          <span class="cd-label">Phút</span>
+        </div>
+        <div class="cd-box">
+          <span class="cd-num" id="cdSeconds">00</span>
+          <span class="cd-label">Giây</span>
+        </div>
+      </div>
+
+      <p class="cd-status reveal" id="cdStatus">Chủ Nhật, ngày 28 tháng 03 năm 2027 · 11:00</p>
+    </section>
+
+    <!-- ==================================================================
+             04. OUR STORY – CÂU CHUYỆN TÌNH YÊU
+             - Một vài cột mốc quan trọng.
+             - Ảnh kỷ niệm.
+             - Nội dung ngắn gọn.
+             ================================================================== -->
+    <section class="story-sec" id="story">
+      <div class="sec-head reveal">
+        <!-- <span class="sec-num">OUR STORY</span> -->
+        <h2>Câu chuyện tình yêu</h2>
+        <span class="lbl">Hành trình yêu thương của chúng mình</span>
+      </div>
+
+      <div class="story-timeline">
+        <article class="story-item reveal">
+          <div class="story-media">
+            <img src="img/aisle.jpg" alt="Lần đầu gặp gỡ" class="plx" data-speed="-12">
+          </div>
+          <div class="story-content">
+            <span class="story-date">Mùa Thu · 2022</span>
+            <h3>Lần đầu gặp gỡ</h3>
+            <p>Một buổi chiều tình cờ với ánh nắng dịu nhẹ, cuộc trò chuyện tưởng chừng ngắn ngủi ấy lại mở ra hành
+              trình dài của hai trái tim đồng điệu.</p>
+          </div>
+        </article>
+
+        <article class="story-item reveal">
+          <div class="story-media">
+            <img src="img/beach.jpg" alt="Những chuyến đi thanh xuân" class="plx" data-speed="-12">
+          </div>
+          <div class="story-content">
+            <span class="story-date">Mùa Hè · 2024</span>
+            <h3>Những chuyến đi thanh xuân</h3>
+            <p>Cùng nhau đi qua bao cung đường biển xanh và phố núi, lưu giữ hàng trăm bức hình kỷ niệm và nhận ra nơi
+              bình yên nhất chính là ở cạnh nhau.</p>
+          </div>
+        </article>
+
+        <article class="story-item reveal">
+          <div class="story-media">
+            <img src="img/hands.jpg" alt="Lời cầu hôn ngọt ngào" class="plx" data-speed="-12">
+          </div>
+          <div class="story-content">
+            <span class="story-date">Mùa Đông · 2026</span>
+            <h3>Lời cầu hôn ngọt ngào</h3>
+            <p>Chiếc nhẫn trao tay cùng lời hứa giản dị nhưng trọn vẹn: Từ nay về sau, mọi mùa trong năm mình đều về
+              chung một nhà.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ==================================================================
+             05. GALLERY – ALBUM ẢNH
+             - Grid ảnh bất đối xứng.
+             - Nhấn ảnh để mở Lightbox.
+             - Hỗ trợ vuốt ảnh trên điện thoại.
+             ================================================================== -->
+    <section class="gallery-sec" id="gallery">
+      <div class="sec-head reveal">
+        <!-- <span class="sec-num">GALLERY</span> -->
+        <h2>Album ảnh cưới</h2>
+        <span class="lbl">Nhấn vào từng bức ảnh để xem kích thước lớn</span>
+      </div>
+
+      <div class="gallery-asymmetric" id="galleryGrid">
+        <figure class="gallery-item reveal">
+          <img src="img/hero.jpg" data-full="img/hero.jpg" alt="Tố Hạ &amp; Hồng Sơn - Khoảnh khắc 01">
+          <figcaption class="gallery-caption">Khoảnh khắc hạnh phúc 01</figcaption>
+        </figure>
+        <figure class="gallery-item reveal">
+          <img src="img/beach.jpg" data-full="img/beach.jpg" alt="Dạo bước bên bờ biển - Khoảnh khắc 02">
+          <figcaption class="gallery-caption">Dạo bước bên bờ biển</figcaption>
+        </figure>
+        <figure class="gallery-item reveal">
+          <img src="img/hands.jpg" data-full="img/hands.jpg" alt="Nhẫn cưới gắn kết - Khoảnh khắc 03">
+          <figcaption class="gallery-caption">Nhẫn cưới gắn kết</figcaption>
+        </figure>
+        <figure class="gallery-item reveal">
+          <img src="img/fashion.jpg" data-full="img/fashion.jpg" alt="Nét thanh lịch ngày chung đôi - Khoảnh khắc 04">
+          <figcaption class="gallery-caption">Nét thanh lịch ngày chung đôi</figcaption>
+        </figure>
+        <figure class="gallery-item reveal">
+          <img src="img/aisle.jpg" data-full="img/aisle.jpg" alt="Không gian lễ đường - Khoảnh khắc 05">
+          <figcaption class="gallery-caption">Không gian lễ đường</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ==================================================================
+             06. WEDDING INFORMATION – THÔNG TIN LỄ CƯỚI
+             - Ngày giờ tổ chức.
+             - Địa điểm nhà trai và nhà gái.
+             - Google Maps và nút chỉ đường.
+             ================================================================== -->
+    <section class="info-sec" id="wedding-info">
+      <div class="info-inner">
+        <div class="sec-head reveal">
+          <!-- <span class="sec-num">WEDDING INFORMATION</span> -->
+          <h2>Thông tin lễ cưới</h2>
+          <span class="lbl">Thời gian &amp; Địa điểm tổ chức hôn lễ</span>
+        </div>
+
+        <div class="venue-cards stagger">
+          <!-- Nhà Gái -->
+          <article class="venue-card">
+            <div>
+              <span class="caps">Lễ Vu Quy · Nhà Gái</span>
+              <p class="venue-parents">Con gái Ông Phạm Công Toàn<br>&amp; Bà Nguyễn Thị Tâm Anh</p>
+              <h3>Phạm Nguyên Tố Hạ</h3>
+              <p class="venue-time">08:00 · Chủ Nhật, 28/03/2027</p>
+              <p class="venue-address">Tư gia Nhà Gái &amp; Trung Tâm Tiệc Cưới Gold Palace, QL1A, An Thắng, Đà Nẵng</p>
+            </div>
+            <a class="rbtn lite" href="https://maps.app.goo.gl/SURdS3xMy4xF3qZJ9" target="_blank" rel="noopener">
+              <span>Chỉ đường Nhà Gái</span>
+              <span>&#8594;</span>
+            </a>
+          </article>
+
+          <!-- Tiệc Cưới Chính -->
+          <article class="venue-card featured">
+            <div>
+              <span class="caps">Tiệc Cưới Chính Thức</span>
+              <h3>Gold Palace Đà Nẵng</h3>
+              <p class="venue-parents">Đón khách: 11:00 · Khai tiệc: 11:30</p>
+              <p class="venue-time">Chủ Nhật · 28/03/2027</p>
+              <p class="venue-address">Nhằm ngày 21/02 năm Đinh Mùi<br>Địa chỉ: QL1A, An Thắng, Đà Nẵng, Việt Nam</p>
+            </div>
+            <a class="rbtn lite" href="https://maps.app.goo.gl/SURdS3xMy4xF3qZJ9" target="_blank" rel="noopener">
+              <span>Chỉ đường Tiệc Cưới</span>
+              <span>&#8594;</span>
+            </a>
+          </article>
+
+          <!-- Nhà Trai -->
+          <article class="venue-card">
+            <div>
+              <span class="caps">Lễ Tân Hôn · Nhà Trai</span>
+              <p class="venue-parents">Con trai Bà Nguyễn Thị Mai</p>
+              <h3>Đặng Hồng Sơn</h3>
+              <p class="venue-time">09:00 · Chủ Nhật, 28/03/2027</p>
+              <p class="venue-address">Tư gia Nhà Trai &amp; Trung Tâm Tiệc Cưới Gold Palace, QL1A, An Thắng, Đà Nẵng
+              </p>
+            </div>
+            <a class="rbtn lite" href="https://maps.app.goo.gl/SURdS3xMy4xF3qZJ9" target="_blank" rel="noopener">
+              <span>Chỉ đường Nhà Trai</span>
+              <span>&#8594;</span>
+            </a>
+          </article>
+        </div>
+
+        <!-- Bản đồ Google Maps nhúng & nút mở chỉ đường -->
+        <!-- <div class="map-frame-wrap reveal">
+          <iframe class="map-embed" title="Bản đồ Trung Tâm Hội Nghị Tiệc Cưới Gold Palace" loading="lazy"
+            allowfullscreen referrerpolicy="no-referrer-when-downgrade"
+            src="https://www.google.com/maps?q=Trung+Tam+Hoi+Nghi+Tiec+Cuoi+Gold+Palace+Da+Nang&output=embed">
+          </iframe>
+          <div class="map-details">
+            <span class="caps" style="color:var(--gold);display:block;margin-bottom:10px">Google Maps</span>
+            <h3>Trung Tâm Hội Nghị Tiệc Cưới Gold Palace</h3>
+            <p>Nằm ngay trên trục đường Quốc lộ 1A thuận tiện di chuyển, có sảnh đón khách sang trọng và bãi đỗ xe ô tô,
+              xe máy miễn phí rộng rãi.</p>
+            <a class="rbtn lite" href="https://maps.app.goo.gl/SURdS3xMy4xF3qZJ9" target="_blank" rel="noopener">
+              <span>Mở ứng dụng Google Maps</span>
+              <span>&#8594;</span>
+            </a>
+          </div> -->
+      </div>
+      </div>
+    </section>
+
+    <!-- ==================================================================
+             07. RSVP – XÁC NHẬN THAM DỰ
+             - Tên khách mời.
+             - Có tham dự hay không.
+             - Số lượng người tham dự.
+             - Lời chúc.
+             ================================================================== -->
+    <section class="rsvp-sec" id="rsvp">
+      <div class="sec-head reveal">
+        <!-- <span class="sec-num">07 · RSVP</span> -->
+        <h2>Xác nhận tham dự &amp; Lời chúc</h2>
+        <span class="lbl">Sự hiện diện của quý khách là niềm vinh hạnh của gia đình</span>
+      </div>
+
+      <div class="rsvp-layout">
+        <div class="rsvp-form-card reveal">
+          <form id="rsvpForm">
+            <div class="field-group">
+              <label for="rsvpName">Tên khách mời *</label>
+              <input type="text" id="rsvpName" placeholder="Nhập họ và tên của bạn..." required>
+            </div>
+
+            <div class="field-group">
+              <label for="rsvpAttend">Bạn sẽ tham dự chứ? *</label>
+              <select id="rsvpAttend">
+                <option value="yes">Có, tôi chắc chắn sẽ tham dự</option>
+                <option value="no">Rất tiếc, tôi bận không thể đến được</option>
+              </select>
+            </div>
+
+            <div class="field-group" id="guestsFieldGroup">
+              <label for="rsvpGuests">Số lượng người tham dự</label>
+              <select id="rsvpGuests">
+                <option value="1">1 người</option>
+                <option value="2">2 người</option>
+                <option value="3">3 người</option>
+                <option value="4">4 người</option>
+                <option value="5">5 người</option>
+              </select>
+            </div>
+
+            <div class="field-group">
+              <label for="rsvpWish">Lời chúc gửi đến cô dâu &amp; chú rể</label>
+              <textarea id="rsvpWish" rows="4"
+                placeholder="Viết lời chúc tốt đẹp dành cho Tố Hạ &amp; Hồng Sơn..."></textarea>
+            </div>
+
+            <button type="submit" class="rbtn" style="width:100%">
+              <span>Gửi xác nhận &amp; Lời chúc</span>
+              <span>&#8594;</span>
+            </button>
+            <p class="rsvp-feedback" id="rsvpFeedback"></p>
+          </form>
+        </div>
+
+        <div class="wishes-column reveal">
+          <h3>Sổ lưu bút lời chúc</h3>
+          <div class="wishes-list" id="wishesList"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================================================================
+             08. WEDDING GIFT – MỪNG CƯỚI
+             - QR chuyển khoản.
+             - Thông tin ngân hàng.
+             - Nút sao chép số tài khoản.
+             ================================================================== -->
+    <section class="gift-sec" id="wedding-gift">
+      <div class="sec-head reveal">
+        <!-- <span class="sec-num">08 · WEDDING GIFT</span> -->
+        <h2>Gửi quà mừng cưới</h2>
+        <span class="lbl">Hộp mừng cưới trực tuyến</span>
+      </div>
+      <p class="gift-intro reveal">
+        Tình cảm và sự hiện diện của quý khách là món quà trân quý nhất. Nếu quý khách ở xa muốn gửi quà mừng trực
+        tuyến, xin vui lòng quét mã QR hoặc sao chép thông tin tài khoản dưới đây.
+      </p>
+
+      <div class="gift-grid stagger">
+        <!-- Mừng cưới Chú Rể -->
+        <article class="gift-card">
+          <span class="caps">Nhà Trai · Chú Rể</span>
+          <h3>Đặng Hồng Sơn</h3>
+          <div class="gift-qr-box">
+            <img id="groomQrImg" src="assets/qr/qr-gift.svg" alt="QR Mừng cưới Chú Rể">
+          </div>
+          <div class="bank-meta">
+            <p class="bank-name" id="groomBankName">Vietcombank (VCB)</p>
+            <p class="acc-number" id="groomAccNumber">0123456789</p>
+            <p class="acc-holder" id="groomAccHolder">DANG HONG SON</p>
+          </div>
+          <button type="button" class="rbtn" id="groomCopyBtn">
+            <span>Sao chép số tài khoản</span>
+          </button>
+        </article>
+
+        <!-- Mừng cưới Cô Dâu -->
+        <article class="gift-card">
+          <span class="caps">Nhà Gái · Cô Dâu</span>
+          <h3>Phạm Nguyên Tố Hạ</h3>
+          <div class="gift-qr-box">
+            <img id="brideQrImg" src="assets/qr/qr-gift.svg" alt="QR Mừng cưới Cô Dâu">
+          </div>
+          <div class="bank-meta">
+            <p class="bank-name" id="brideBankName">Techcombank (TCB)</p>
+            <p class="acc-number" id="brideAccNumber">9876543210</p>
+            <p class="acc-holder" id="brideAccHolder">PHAM NGUYEN TO HA</p>
+          </div>
+          <button type="button" class="rbtn" id="brideCopyBtn">
+            <span>Sao chép số tài khoản</span>
+          </button>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <!-- Chân trang -->
+  <footer class="footer">
+    <span class="caps reveal">Chủ Nhật · 28 . 03 . 2027 · Gold Palace Đà Nẵng</span>
+    <div class="script footer-word reveal">Tố Hạ <span class="amp">&amp;</span> Hồng Sơn</div>
+    <div class="byline">
+      <span>Cảm ơn quý khách đã đến chung vui cùng gia đình</span>
+      <span>Tố Hạ &amp; Hồng Sơn · 2027</span>
+    </div>
+  </footer>
+
+  <!-- Hộp thoại Lightbox xem ảnh lớn (Hỗ trợ vuốt trên điện thoại) -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-hidden="true" aria-label="Xem ảnh phóng to">
+    <button type="button" class="lightbox-close" id="lightboxClose" aria-label="Đóng">&times;</button>
+    <button type="button" class="lightbox-nav lightbox-prev" id="lightboxPrev" aria-label="Ảnh trước">&#10094;</button>
+    <div class="lightbox-content">
+      <img id="lightboxImg" src="" alt="Ảnh phóng to">
+      <p class="lightbox-caption" id="lightboxCaption"></p>
+    </div>
+    <button type="button" class="lightbox-nav lightbox-next" id="lightboxNext"
+      aria-label="Ảnh tiếp theo">&#10095;</button>
+  </div>
+
+  <!-- Các module JS quản lý từng phần -->
+  <script src="js/config.js"></script>
+  <script src="js/music.js"></script>
+  <script src="js/envelope.js"></script>
+  <script src="js/countdown.js"></script>
+  <script src="js/gallery.js"></script>
+  <script src="js/rsvp.js"></script>
 </body>
 
 </html>

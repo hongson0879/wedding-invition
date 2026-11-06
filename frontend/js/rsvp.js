@@ -1,6 +1,6 @@
 /**
- * rsvp.js - Gọi API Spring Boot cho phần Xác nhận tham dự (RSVP) & Lời chúc
- * Khi Backend chưa sẵn sàng hoặc chạy trên GitHub Pages, tự động fallback về dữ liệu Dummy + localStorage.
+ * rsvp.js - Gọi API Spring Boot cho 07. RSVP – Xác nhận tham dự & Lời chúc
+ * Khi Backend chưa sẵn sàng hoặc chạy tĩnh, tự động fallback về dữ liệu Dummy + localStorage.
  */
 const STORAGE_KEY = 'wedding_wishes_data';
 
@@ -27,7 +27,6 @@ function saveLocalWish(entry) {
 
 /**
  * Lấy danh sách lời chúc từ API Spring Boot (GET /api/wishes)
- * Fallback sang localStorage + dummyWishes nếu backend chưa chạy
  */
 async function fetchWishes() {
     try {
@@ -44,7 +43,6 @@ async function fetchWishes() {
 
 /**
  * Gửi thông tin RSVP & lời chúc lên API Spring Boot (POST /api/rsvp)
- * Fallback lưu vào localStorage nếu backend chưa chạy
  */
 async function submitRsvpToApi(payload) {
     try {
@@ -56,7 +54,6 @@ async function submitRsvpToApi(payload) {
         if (!response.ok) throw new Error('API not available');
         return await response.json();
     } catch (_) {
-        // Fallback lưu local khi chưa bật backend
         if (payload.wish) {
             saveLocalWish(payload);
         }
@@ -65,66 +62,85 @@ async function submitRsvpToApi(payload) {
 }
 
 function renderWishesList(wishes) {
-    const container = document.getElementById('wishes');
+    const container = document.getElementById('wishesList');
     if (!container) return;
 
     container.innerHTML = '';
     wishes.slice().reverse().forEach(w => {
         if (!w.wish) return;
-        const div = document.createElement('div');
-        div.className = 'wish';
+        const item = document.createElement('article');
+        item.className = 'wish-card';
 
         const header = document.createElement('div');
-        const b = document.createElement('b');
-        b.textContent = w.name;
-        header.appendChild(b);
+        header.className = 'wish-header';
 
-        if (w.attend) {
-            const badge = document.createElement('span');
-            badge.className = 'wish-meta';
-            badge.textContent = w.attend === 'yes'
-                ? `• Tham dự (${w.guests || 1} người)`
-                : '• Gửi lời chúc';
-            header.appendChild(badge);
-        }
+        const author = document.createElement('h4');
+        author.className = 'wish-author';
+        author.textContent = w.name;
 
-        const p = document.createElement('p');
-        p.textContent = w.wish;
+        const badge = document.createElement('span');
+        badge.className = 'wish-badge';
+        badge.textContent = w.attend === 'yes'
+            ? `Tham dự (${w.guests || 1} khách)`
+            : 'Gửi lời chúc';
 
-        div.append(header, p);
-        container.appendChild(div);
+        header.append(author, badge);
+
+        const msg = document.createElement('p');
+        msg.className = 'wish-text';
+        msg.textContent = w.wish;
+
+        item.append(header, msg);
+        container.appendChild(item);
     });
 }
 
 async function initRsvp() {
     const form = document.getElementById('rsvpForm');
+    const attendSelect = document.getElementById('rsvpAttend');
+    const guestsGroup = document.getElementById('guestsFieldGroup');
+    const feedbackEl = document.getElementById('rsvpFeedback');
+
     const wishes = await fetchWishes();
     renderWishesList(wishes);
+
+    if (attendSelect && guestsGroup) {
+        attendSelect.addEventListener('change', () => {
+            const isAttending = attendSelect.value === 'yes';
+            guestsGroup.style.opacity = isAttending ? '1' : '0.45';
+        });
+    }
 
     if (!form) return;
 
     form.addEventListener('submit', async e => {
         e.preventDefault();
-        const nameEl = document.getElementById('name');
-        const guestsEl = document.getElementById('guests');
-        const attendEl = document.getElementById('attend');
-        const wishEl = document.getElementById('wish');
+        const nameEl = document.getElementById('rsvpName');
+        const attendEl = document.getElementById('rsvpAttend');
+        const guestsEl = document.getElementById('rsvpGuests');
+        const wishEl = document.getElementById('rsvpWish');
 
         const payload = {
             name: nameEl.value.trim(),
-            guests: parseInt(guestsEl.value, 10) || 1,
             attend: attendEl.value,
+            guests: attendEl.value === 'yes' ? (parseInt(guestsEl.value, 10) || 1) : 0,
             wish: wishEl.value.trim(),
             createdAt: new Date().toISOString()
         };
 
         await submitRsvpToApi(payload);
 
-        alert(payload.attend === 'yes'
-            ? `Cảm ơn ${payload.name}! Hẹn gặp bạn tại tiệc cưới 💕`
-            : 'Cảm ơn bạn đã phản hồi. Chúng tôi rất tiếc vì sự vắng mặt của bạn!');
+        if (feedbackEl) {
+            feedbackEl.textContent = payload.attend === 'yes'
+                ? `Cảm ơn ${payload.name}! Gia đình rất hân hạnh được đón tiếp bạn tại buổi tiệc.`
+                : `Cảm ơn ${payload.name} đã gửi lời chúc tốt đẹp đến vợ chồng mình!`;
+            feedbackEl.classList.add('visible');
+            setTimeout(() => feedbackEl.classList.remove('visible'), 5000);
+        }
 
         form.reset();
+        if (guestsGroup) guestsGroup.style.opacity = '1';
+
         const updatedWishes = await fetchWishes();
         renderWishesList(updatedWishes);
     });

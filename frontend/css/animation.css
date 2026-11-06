@@ -1,102 +1,189 @@
-/* ===== ANIMATIONS & ENVELOPE EFFECTS ===== */
+/* ==========================================================================
+   animation.css - Quản lý hiệu ứng mở phong bì (01. Envelope) và các animation
+   ========================================================================== */
 
-/* Envelope Opening & Floating */
-.envelope-screen {
-    transition: opacity 0.8s ease, transform 0.8s ease;
+/* 01. Hiệu ứng mở nắp phong bì & trượt thiệp ra */
+.envelope-flap {
+    transition: transform 0.65s cubic-bezier(.65, 0, .35, 1), z-index 0.1s 0.32s;
 }
 
-.envelope-screen.open {
+.envelope-letter {
+    transition: transform 0.85s 0.45s cubic-bezier(.22, 1, .36, 1), box-shadow 0.6s 0.45s;
+}
+
+.envelope-seal {
+    transition: transform 0.4s ease, opacity 0.4s ease;
+}
+
+/* Khi nhấn mở phong bì (.opening) */
+.envelope-box.opening .envelope-seal {
     opacity: 0;
-    transform: scale(1.15);
+    transform: translate(-50%, -50%) scale(0.6);
+}
+
+.envelope-box.opening .envelope-flap {
+    transform: rotateX(180deg);
+    z-index: 1;
+}
+
+.envelope-box.opening .envelope-letter {
+    transform: translateY(-125px);
+    z-index: 6;
+    box-shadow: 0 22px 50px rgba(46, 42, 36, 0.22);
+}
+
+/* Màn hình phong bì mờ dần sau khi thiệp trượt ra */
+.envelope-section {
+    transition: opacity 0.85s ease, visibility 0.85s ease;
+}
+
+.envelope-section.envelope-dismissed {
+    opacity: 0;
+    visibility: hidden;
     pointer-events: none;
 }
 
-.envelope-card {
-    animation: float 3s ease-in-out infinite;
+/* Nhịp thở nhẹ cho con dấu Monogram */
+.envelope-seal {
+    animation: sealPulse 2.8s ease-in-out infinite;
 }
 
-@keyframes float {
+@keyframes sealPulse {
     50% {
-        transform: translateY(-10px);
+        transform: translate(-50%, -53%) scale(1.04);
     }
 }
 
-/* Music Button Spin */
-.music-btn.playing {
-    animation: spin 3s linear infinite;
+/* Nút bấm hiệu ứng trượt nền */
+.rbtn {
+    transition: color .45s, border-color .45s;
 }
 
-@keyframes spin {
+.rbtn::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: var(--ink);
+    transform: translateY(101%);
+    transition: transform .5s cubic-bezier(.76, 0, .24, 1);
+}
+
+.rbtn:hover::before {
+    transform: none;
+}
+
+.rbtn:hover {
+    color: var(--paper);
+}
+
+.rbtn.lite::before {
+    background: var(--cream);
+}
+
+.rbtn.lite:hover {
+    color: var(--sagedeep);
+}
+
+.rbtn.copied {
+    border-color: var(--gold);
+}
+
+/* Nút nhạc xoay tròn khi đang phát */
+.music-btn.playing {
+    animation: spinMusic 4s linear infinite;
+    background: var(--gold);
+    color: var(--paper);
+}
+
+@keyframes spinMusic {
     to {
         transform: rotate(360deg);
     }
 }
 
-/* Scroll Hint Bounce */
-.scroll-hint {
-    animation: bounce 1.5s infinite;
+/* Navbar ẩn/hiện khi cuộn */
+.navbar::before {
+    transform: translateY(-101%);
+    transition: transform .5s cubic-bezier(.76, 0, .24, 1);
 }
 
-@keyframes bounce {
-    50% {
-        transform: translateY(10px);
-    }
+.navbar.scrolled::before {
+    transform: none;
 }
 
-/* Heart Beat */
-.heart {
-    animation: beat 1.2s infinite;
+/* Hero xuất hiện sau khi mở phong bì */
+.hero-names .hl > span {
+    display: block;
+    transform: translateY(110%);
+    transition: transform 1.2s .2s cubic-bezier(.16, .7, .2, 1);
 }
 
-@keyframes beat {
-    50% {
-        transform: scale(1.3);
-    }
+body.loaded .hero-names .hl > span {
+    transform: none;
 }
 
-/* Scroll Reveal */
+.hero-arch {
+    clip-path: inset(100% 0 0 0);
+    transition: clip-path 1.4s .3s cubic-bezier(.7, 0, .2, 1);
+}
+
+body.loaded .hero-arch {
+    clip-path: inset(0 0 0 0);
+}
+
+/* Hiệu ứng cuộn trang Reveal & Stagger */
 .reveal {
     opacity: 0;
-    transform: translateY(40px);
-    transition: opacity 1s ease, transform 1s ease;
+    transform: translateY(38px);
+    transition: opacity 1.1s ease, transform 1.1s cubic-bezier(.16, .6, .2, 1);
 }
 
-.reveal.show {
+.reveal.in {
     opacity: 1;
     transform: none;
 }
 
-/* Gallery Hover & Lightbox Fade */
-.gallery img {
-    transition: transform 0.4s ease, box-shadow 0.4s ease;
+.stagger > * {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.9s ease, transform 0.9s cubic-bezier(.16, .6, .2, 1);
 }
 
-.gallery img:hover {
-    transform: scale(1.05) rotate(-1deg);
+.stagger.in > * {
+    opacity: 1;
+    transform: none;
+}
+
+.stagger.in > *:nth-child(2) { transition-delay: .1s; }
+.stagger.in > *:nth-child(3) { transition-delay: .2s; }
+.stagger.in > *:nth-child(4) { transition-delay: .3s; }
+
+/* Hiệu ứng hover ảnh Gallery & Lightbox */
+.gallery-item img {
+    transition: transform 0.65s cubic-bezier(.16, .6, .2, 1);
+}
+
+.gallery-item:hover img {
+    transform: scale(1.06);
+}
+
+.gallery-item .gallery-caption {
+    transition: opacity 0.35s ease;
+}
+
+.gallery-item:hover .gallery-caption {
+    opacity: 1;
 }
 
 .lightbox {
     opacity: 0;
+    visibility: hidden;
     pointer-events: none;
-    transition: opacity 0.3s ease;
+    transition: opacity 0.35s ease, visibility 0.35s ease;
 }
 
 .lightbox.active {
     opacity: 1;
+    visibility: visible;
     pointer-events: auto;
-}
-
-.lightbox-content img {
-    animation: zoomIn 0.3s ease;
-}
-
-@keyframes zoomIn {
-    from {
-        transform: scale(0.9);
-        opacity: 0;
-    }
-    to {
-        transform: scale(1);
-        opacity: 1;
-    }
 }
