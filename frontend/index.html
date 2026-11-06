@@ -2,127 +2,148 @@
 <html lang="vi">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Thiệp mời cưới - Hồng Sơn & Tố Hạ</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link
-    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Great+Vibes&family=Montserrat:wght@300;400;500&display=swap"
-    rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Thiệp mời cưới - Hồng Sơn &amp; Tố Hạ</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Great+Vibes&family=Montserrat:wght@300;400;500&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animation.css">
+    <link rel="stylesheet" href="css/responsive.css">
 </head>
 
 <body>
 
-  <div class="envelope-screen" id="envelope">
-    <div class="envelope-card">
-      <p class="small">Bạn nhận được một lời mời</p>
-      <h2 class="script">Sơn &amp; Hạ</h2>
-      <button id="openBtn">Mở thiệp ✉</button>
+    <div class="envelope-screen" id="envelope">
+        <div class="envelope-card">
+            <p class="small">Bạn nhận được một lời mời</p>
+            <h2 class="script">Sơn &amp; Hạ</h2>
+            <button id="openBtn">Mở thiệp ✉</button>
+        </div>
     </div>
-  </div>
 
-  <button class="music-btn" id="musicBtn" title="Bật/tắt nhạc">♪</button>
+    <button class="music-btn" id="musicBtn" title="Bật/tắt nhạc">♪</button>
 
-  <main id="card" class="hidden">
-    <section class="hero">
-      <p class="small">Trân trọng kính mời</p>
-      <h1 class="script">Sơn <span>&amp;</span> Hạ</h1>
-      <p class="date-line">Tham dự lễ thành hôn của chúng tôi</p>
-      <p class="big-date">28 . 03 . 2027</p>
-      <div class="scroll-hint">↓</div>
-    </section>
+    <main id="card" class="hidden">
+        <section class="hero">
+            <p class="small">Trân trọng kính mời</p>
+            <h1 class="script">Hồng Sơn <span>&amp;</span> Tố Hạ</h1>
+            <p class="date-line">Tham dự lễ thành hôn của chúng tôi</p>
+            <p class="big-date">28 . 03 . 2027</p>
+            <p class="big-date">21 . 02 . Đinh Mùi</p>
+            <div class="scroll-hint">↓</div>
+        </section>
 
-    <section class="reveal couple">
-      <h2 class="title">Cô dâu &amp; Chú rể</h2>
-      <div class="people">
-        <div class="person">
-          <div class="avatar">S</div>
-          <h3>Đặng Hồng Sơn</h3>
-          <p>Con trai bà Nguyễn Thị Mai</p>
+        <section class="reveal couple">
+            <h2 class="title">Cô dâu &amp; Chú rể</h2>
+            <div class="people">
+                <div class="person">
+                    <div class="avatar">S</div>
+                    <h3>Đặng Hồng Sơn</h3>
+                    <p>Con trai bà Nguyễn Thị Mai</p>
+                </div>
+                <div class="heart">❤</div>
+                <div class="person">
+                    <div class="avatar">H</div>
+                    <h3>Phạm Nguyên Tố Hạ</h3>
+                    <p>Con gái ông Phạm Công Toàn<br>và bà Nguyễn Thị Tâm Anh</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="reveal countdown-sec">
+            <h2 class="title">Đếm ngược đến ngày cưới</h2>
+            <div class="countdown" id="countdown">
+                <div><b id="d">0</b><span>Ngày</span></div>
+                <div><b id="h">00</b><span>Giờ</span></div>
+                <div><b id="m">00</b><span>Phút</span></div>
+                <div><b id="s">00</b><span>Giây</span></div>
+            </div>
+        </section>
+
+        <section class="reveal event">
+            <h2 class="title">Thông tin buổi tiệc</h2>
+            <div class="event-box">
+                <p>🕒 <b>11:00</b> - Chủ Nhật, 28/03/2027</p>
+                <p>📍 <b>Trung Tâm Hội Nghị Tiệc Cưới Gold Palace</b><br>QL1A, An Thắng, Đà Nẵng, Việt Nam</p>
+                <a class="btn" target="_blank" href="https://maps.app.goo.gl/SURdS3xMy4xF3qZJ9">Xem bản đồ</a>
+            </div>
+        </section>
+
+        <section class="reveal gallery-sec">
+            <h2 class="title">Album ảnh cưới</h2>
+            <div class="gallery" id="galleryGrid">
+                <img src="https://picsum.photos/seed/wed1/400/500" alt="Khoảnh khắc ngọt ngào 1">
+                <img src="https://picsum.photos/seed/wed2/400/400" alt="Khoảnh khắc ngọt ngào 2">
+                <img src="https://picsum.photos/seed/wed3/400/500" alt="Khoảnh khắc ngọt ngào 3">
+                <img src="https://picsum.photos/seed/wed4/400/400" alt="Khoảnh khắc ngọt ngào 4">
+            </div>
+        </section>
+
+        <section class="reveal rsvp">
+            <h2 class="title">Xác nhận tham dự</h2>
+            <form id="rsvpForm">
+                <input type="text" id="name" placeholder="Họ và tên" required>
+                <select id="guests">
+                    <option value="1">1 người</option>
+                    <option value="2">2 người</option>
+                    <option value="3">3 người</option>
+                    <option value="4">4 người</option>
+                </select>
+                <select id="attend">
+                    <option value="yes">Tôi sẽ tham dự</option>
+                    <option value="no">Rất tiếc, tôi không thể đến</option>
+                </select>
+                <textarea id="wish" rows="3" placeholder="Lời chúc gửi đến cô dâu chú rể..."></textarea>
+                <button type="submit" class="btn">Gửi xác nhận</button>
+            </form>
+            <div class="wishes" id="wishes"></div>
+        </section>
+
+        <section class="reveal qr-sec">
+            <h2 class="title">Mã QR</h2>
+            <div class="qr-grid">
+                <div class="qr-item">
+                    <img id="qrMap" src="assets/qr/qr-map.svg" alt="QR Google Map" width="200" height="200">
+                    <h3>Chỉ đường Google Maps</h3>
+                    <p>Quét để xem vị trí buổi tiệc</p>
+                </div>
+                <div class="qr-item">
+                    <img id="qrGift" src="assets/qr/qr-gift.svg" alt="QR chuyển khoản mừng cưới" width="200" height="200">
+                    <h3>Mừng cưới</h3>
+                    <p id="bankInfo">VCB - 0123456789<br>DANG HONG SON</p>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p class="script">Cảm ơn bạn rất nhiều!</p>
+            <p class="small">Sự hiện diện của bạn là niềm vinh hạnh của gia đình chúng tôi</p>
+        </footer>
+    </main>
+
+    <!-- Lightbox phóng to ảnh album -->
+    <div class="lightbox" id="lightbox" role="dialog" aria-hidden="true">
+        <button class="lightbox-close" id="lightboxClose" aria-label="Đóng">&times;</button>
+        <button class="lightbox-nav lightbox-prev" id="lightboxPrev" aria-label="Ảnh trước">&#10094;</button>
+        <div class="lightbox-content">
+            <img id="lightboxImg" src="" alt="Xem ảnh phóng to">
+            <p class="lightbox-caption" id="lightboxCaption"></p>
         </div>
-        <div class="heart">❤</div>
-        <div class="person">
-          <div class="avatar">H</div>
-          <h3>Phạm Nguyên Tố Hạ</h3>
-          <p>Con gái ông Phạm Công Toàn<br>và bà Nguyễn Thị Tâm Anh</p>
-        </div>
-      </div>
-    </section>
+        <button class="lightbox-nav lightbox-next" id="lightboxNext" aria-label="Ảnh tiếp">&#10095;</button>
+    </div>
 
-    <section class="reveal countdown-sec">
-      <h2 class="title">Đếm ngược đến ngày cưới</h2>
-      <div class="countdown" id="countdown">
-        <div><b id="d">0</b><span>Ngày</span></div>
-        <div><b id="h">0</b><span>Giờ</span></div>
-        <div><b id="m">0</b><span>Phút</span></div>
-        <div><b id="s">0</b><span>Giây</span></div>
-      </div>
-    </section>
+    <canvas id="petals"></canvas>
 
-    <section class="reveal event">
-      <h2 class="title">Thông tin buổi tiệc</h2>
-      <div class="event-box">
-        <p>🕒 <b>11:00</b> - Chủ Nhật, 28/03/2027</p>
-        <p>📍 <b>Trung Tâm Hội Nghị Tiệc Cưới Gold Palace</b><br>QL1A, An Thắng, Đà Nẵng, Việt Nam</p>
-        <a class="btn" target="_blank" href="https://maps.app.goo.gl/SURdS3xMy4xF3qZJ9">Xem bản đồ</a>
-      </div>
-    </section>
-
-    <section class="reveal gallery-sec">
-      <h2 class="title">Album ảnh cưới</h2>
-      <div class="gallery">
-        <img src="https://picsum.photos/seed/wed1/400/500" alt="Ảnh cưới 1">
-        <img src="https://picsum.photos/seed/wed2/400/400" alt="Ảnh cưới 2">
-        <img src="https://picsum.photos/seed/wed3/400/500" alt="Ảnh cưới 3">
-        <img src="https://picsum.photos/seed/wed4/400/400" alt="Ảnh cưới 4">
-      </div>
-    </section>
-
-    <section class="reveal rsvp">
-      <h2 class="title">Xác nhận tham dự</h2>
-      <form id="rsvpForm">
-        <input type="text" id="name" placeholder="Họ và tên" required>
-        <select id="guests">
-          <option value="1">1 người</option>
-          <option value="2">2 người</option>
-          <option value="3">3 người</option>
-          <option value="4">4 người</option>
-        </select>
-        <select id="attend">
-          <option value="yes">Tôi sẽ tham dự</option>
-          <option value="no">Rất tiếc, tôi không thể đến</option>
-        </select>
-        <textarea id="wish" rows="3" placeholder="Lời chúc gửi đến cô dâu chú rể..."></textarea>
-        <button type="submit" class="btn">Gửi xác nhận</button>
-      </form>
-      <div class="wishes" id="wishes"></div>
-    </section>
-
-    <section class="reveal qr-sec">
-      <h2 class="title">Mã QR</h2>
-      <div class="qr-grid">
-        <div class="qr-item">
-          <img id="qrMap" alt="QR Google Map" width="200" height="200">
-          <h3>Chỉ đường Google Maps</h3>
-          <p>Quét để xem vị trí buổi tiệc</p>
-        </div>
-        <div class="qr-item">
-          <img id="qrGift" alt="QR chuyển khoản mừng cưới" width="200" height="200">
-          <h3>Mừng cưới</h3>
-          <p id="bankInfo"></p>
-        </div>
-      </div>
-    </section>
-
-    <footer>
-      <p class="script">Cảm ơn bạn rất nhiều!</p>
-      <p class="small">Sự hiện diện của bạn là niềm vinh hạnh của gia đình chúng tôi</p>
-    </footer>
-  </main>
-
-  <canvas id="petals"></canvas>
-  <script src="js/script.js"></script>
+    <!-- Các module JS đã tách theo chức năng -->
+    <script src="js/config.js"></script>
+    <script src="js/music.js"></script>
+    <script src="js/envelope.js"></script>
+    <script src="js/countdown.js"></script>
+    <script src="js/gallery.js"></script>
+    <script src="js/rsvp.js"></script>
 </body>
 
 </html>

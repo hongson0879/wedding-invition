@@ -1,23 +1,41 @@
 # Thiệp mời cưới online - Hồng Sơn & Tố Hạ
 
 ```
-demo-project/
-├── frontend/              # Giao diện (HTML/CSS/JS thuần)
+wedding-invition/
+├── frontend/                              # Giao diện (HTML/CSS/JS thuần, có sẵn fallback dummy)
 │   ├── index.html
-│   ├── css/style.css
-│   ├── js/script.js
+│   ├── css/
+│   │   ├── style.css                      # CSS giao diện chính
+│   │   ├── animation.css                  # Quản lý hiệu ứng mở phong bì và animation
+│   │   └── responsive.css                 # Tách CSS responsive khỏi CSS giao diện chính
+│   ├── js/
+│   │   ├── config.js                      # Lưu cấu hình ngày cưới, tên, địa điểm, dummy data
+│   │   ├── countdown.js                   # Tách logic đếm ngược
+│   │   ├── gallery.js                     # Xử lý album và Lightbox
+│   │   ├── music.js                       # Điều khiển nhạc nền
+│   │   ├── envelope.js                    # Xử lý hiệu ứng mở thiệp & cánh hoa rơi
+│   │   └── rsvp.js                        # Gọi API Spring Boot (tự động fallback localStorage/dummy)
 │   └── assets/
-│       ├── images/        # Ảnh cưới
-│       └── audio/         # music.mp3
-└── backend/               # (dự kiến) Spring Boot
+│       ├── images/                        # Ảnh cưới
+│       ├── qr/                            # Tách QR khỏi ảnh cưới (qr-map.svg, qr-gift.svg)
+│       └── audio/                         # music.mp3
+├── backend/                               # Spring Boot + Flyway
+│   └── src/main/resources/
+│       └── db/migration/                  # Quản lý phiên bản database bằng Flyway
+│           ├── V1__init_wedding_schema.sql
+│           └── V2__seed_initial_data.sql
+└── docs/                                  # Tài liệu kiến trúc và database
+    ├── architecture.md
+    └── database.md
 ```
 
 ## Chạy frontend
 Mở `frontend/index.html` bằng trình duyệt, hoặc chạy server tĩnh:
-`npx serve frontend`
+```bash
+npx serve frontend
+```
+> Khi Backend Spring Boot chưa chạy, Frontend sẽ tự động dùng cấu hình cứng và dữ liệu lời chúc mẫu (dummy data) trong `frontend/js/config.js` kết hợp `localStorage`.
 
-## Kế hoạch backend (Spring Boot)
-- Tạo project Spring Boot (Maven/Gradle) trong thư mục `backend/`.
-- API gợi ý: `POST /api/rsvp`, `GET /api/wishes`, `GET /api/config` (thông tin cưới, ngân hàng, bản đồ).
-- Bật CORS cho origin của frontend khi chạy riêng, hoặc copy `frontend/` vào `src/main/resources/static` để Spring Boot phục vụ cùng domain.
-- Trong `frontend/js/script.js`, thay phần `localStorage` (RSVP/lời chúc) bằng `fetch('/api/...')`.
+## Tài liệu thiết kế
+- Kiến trúc hệ thống & phân rã module: `docs/architecture.md`
+- Thiết kế cơ sở dữ liệu & Flyway migration: `docs/database.md`
